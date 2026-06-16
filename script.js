@@ -377,3 +377,23 @@ async function trackComplaint(){
         </div>
     `;
 }
+async function loadHomeStats() {
+
+    const res = await fetch(
+        "https://civicconnect-xred.onrender.com/stats"
+    );
+
+    const data = await res.json();
+
+    const total = document.getElementById("totalComplaints");
+    const pending = document.getElementById("pendingComplaints");
+    const resolved = document.getElementById("resolvedComplaints");
+
+    if(total) total.textContent = data.total;
+    if(pending) pending.textContent = data.pending;
+    if(resolved) resolved.textContent = data.resolved;
+}
+
+if(document.getElementById("totalComplaints")){
+    loadHomeStats();
+}
