@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!DOCTYPE html>
 <html>
 <head>
@@ -130,4 +131,138 @@ Submit Complaint
 </footer>
 <script src="script.js"></script>
 </body>
+=======
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Register Complaint</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav>
+    <h2>🌿 CivicConnect</h2>
+
+    <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="complaint.html">Register Complaint</a></li>
+        <li><a href="track.html">Track Complaint</a></li>
+        <li><a href="admin.html">Admin Login</a></li>
+    </ul>
+</nav>
+
+<div class="container">
+        <div class="form-card">
+            <div class="form-header"></div>
+        <h1>📝 Lodge a Complaint</h1>
+   <p class="subtitle"> 
+     Fill in the details below to register your complaint.
+   </p>
+<div class="complaint-layout">
+<div class="form-section">
+
+<form id="complaintForm">
+
+<label>👤 Full Name</label><br>
+<input type="text"id="fullName"required placeholder="Enter Your Full Name"><br><br>
+
+<label>📱 Mobile Number</label><br>
+<input
+    type="tel"
+    id="mobile"
+    placeholder="Enter Your Mobile Number"
+    pattern="[0-9]{10}"
+    maxlength="10"
+    required
+><br><br>
+
+<label>🏡 Village Name</label><br>
+<input type="text"id="village"required placeholder="Enter Your Village Name or area"><br><br>
+
+<label>📂 Complaint Category</label>
+<br>
+
+<select id="category"required>
+<option value="">--Select Category--</option>
+<option>Water Supply</option>
+<option>Street Light</option>
+<option>Road Damage</option>
+<option>Drainage</option>
+<option>Garbage Collection</option>
+<option>Sanitation</option>
+</select>
+
+<br><br>
+
+<label>📝 Complaint Description</label>
+<br>
+
+<textarea id="description" rows="5" cols="40"
+placeholder="Describe your complaint in detail"></textarea>
+
+
+<label>Upload Complaint Image </label>
+<br>
+
+<input type="file"id="complaintImage" accept=".jpg,.jpeg,.png"required>
+
+<br><br>
+
+<button type="submit">
+Submit Complaint
+</button>
+<p class="note">
+📌 Please provide accurate information to help us resolve your issue faster.
+</p>
+
+</form>
+<div id="receipt" style="display:none;" class="receipt-card">
+
+    <h2>✅ Complaint Registered Successfully</h2>
+
+    <p><strong>Complaint ID:</strong> <span id="receiptId"></span></p>
+
+    <p><strong>Name:</strong> <span id="receiptName"></span></p>
+
+    <p><strong>Village:</strong> <span id="receiptVillage"></span></p>
+
+    <p><strong>Category:</strong> <span id="receiptCategory"></span></p>
+
+    <p><strong>Status:</strong> Pending</p>
+
+    <button onclick="window.print()">🖨 Print Receipt</button>
+
+</div>
+</div>
+        
+       <div class="right-panel">
+
+    <div class="category-section">
+        <h3>Complaint Categories</h3>
+
+        <p>💧 Water Supply</p>
+        <p>💡 Street Lights</p>
+        <p>🚧 Road Damage</p>
+        <p>🗑️ Garbage</p>
+        <p>🌊 Drainage</p>
+        <p>🧹 Sanitation</p>
+    </div>
+
+    <div class="info-box">
+        <h4>📢 Quick Note</h4>
+        <p>
+            Please provide accurate details and location
+            information for faster complaint resolution.
+        </p>
+    </div>
+
+</div>
+</div>
+</div>
+</div>
+<footer>
+    <p>© 2026 CivicConnect | Developed by CSP Team</p>
+</footer>
+<script src="script.js"></script>
+</body>
+>>>>>>> 71b3e4e4f6f902c95fc9786afb96cfff1a161ab1
 </html>

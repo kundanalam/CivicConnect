@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!DOCTYPE html>
 <html>
 <head>
@@ -168,4 +169,176 @@ loadReports();
 <script src="script.js"></script>
 
 </body>
+=======
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Reports & Analytics</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+<div class="dashboard-layout">
+
+    <div class="sidebar">
+        <h2>🌿 CivicConnect</h2>
+
+        <a href="dashboard.html">📊 Dashboard</a>
+        <a href="complaints.html">📋 Complaints</a>
+        <a href="area-complaints.html">📍 Area Complaints</a>
+        <a href="reports.html"class="Active">📈 Reports</a>
+    <div class="sidebar-bottom">
+        <a href="index.html">🏠 Back to Home</a>
+        <a href="admin.html">🚪 Logout</a>
+    </div>
+    </div>
+
+    <div class="main-content">
+        <div class="reports-header">
+
+    <h1>📈 Reports & Analytics</h1>
+
+    <button class="download-btn" onclick="downloadExcel()">
+        ⬇ Download Excel Report
+    </button>
+    <div class="filter-box">
+
+    <select id="statusFilter" onchange="loadReports()">
+        <option value="all">All</option>
+        <option value="Pending">Pending</option>
+        <option value="In Progress">In Progress</option>
+        <option value="Resolved">Resolved</option>
+    </select>
+
+</div>
+
+</div>
+        <div class="dashboard-cards">
+
+            <div class="dashboard-card">
+    <h3 id="totalCount">0</h3>
+    <p>Total Complaints</p>
+</div>
+
+<div class="dashboard-card">
+    <h3 id="resolvedCount">0</h3>
+    <p>Resolved</p>
+</div>
+
+<div class="dashboard-card">
+    <h3 id="pendingCount">0</h3>
+    <p>Pending</p>
+</div>
+
+<div class="dashboard-card">
+    <h3 id="progressCount">0</h3>
+    <p>In Progress</p>
+</div>
+
+        </div>
+        <div class="charts-row">
+
+    <div class="chart-card">
+        <h3>Complaints by Category</h3>
+        <canvas id="complaintChart"></canvas>
+    </div>
+
+    <div class="chart-card">
+        <h3>Status Overview</h3>
+        <canvas id="statusChart"></canvas>
+    </div>
+
+</div>
+
+        <div class="bottom-section">
+
+            <div class="activity-card">
+
+                <h2>Recent Activity</h2>
+
+                <ul id ="recentActivityList"class=>
+                    <li>✅ Complaint CC2026002 resolved</li>
+                    <li>🔄 Complaint assigned to officer</li>
+                    <li>📋 New complaint registered</li>
+                </ul>
+
+            </div>
+
+           <div class="summary-card">
+    <h2>Category Summary</h2>
+    <div id="categorySummary"></div>
+</div>
+
+        </div>
+
+    </div>
+
+</div>
+<script>
+
+async function loadReports(){
+
+    const res = await fetch("http://127.0.0.1:5000/reports-data");
+    const data = await res.json();
+    
+let filteredData = data;
+
+const status = document.getElementById("statusFilter")?.value;
+
+if(status && status !== "all"){
+    filteredData = data.filter(item => {
+        return item.status &&
+               item.status.trim().toLowerCase() === status.trim().toLowerCase();
+    });
+}
+    // STATUS CHART (unchanged)
+    new Chart(document.getElementById('statusChart'), {
+        type: 'pie',
+        data: {
+            labels: Object.keys(data.status),
+            datasets: [{
+                data: Object.values(data.status)
+            }]
+        }
+    });
+
+    // CATEGORY CHART (unchanged)
+    new Chart(document.getElementById('complaintChart'), {
+        type: 'bar',
+        data: {
+            labels: Object.keys(data.categories),
+            datasets: [{
+                label: 'Complaints',
+                data: Object.values(data.categories)
+            }]
+        }
+    });
+
+    // RECENT ACTIVITY
+    const recentList = document.getElementById("recentActivityList");
+    recentList.innerHTML = "";
+
+    data.recent.forEach(c => {
+        recentList.innerHTML += `
+            <li>📌 ${c.complaint_id} - ${c.category} - ${c.status}</li>
+        `;
+    });
+
+    const catDiv = document.getElementById("categorySummary");
+catDiv.innerHTML = "";
+
+for(let c in data.category_summary){
+    catDiv.innerHTML += `
+        <p>📊 ${c} → ${data.category_summary[c]} complaints</p>
+    `;
+}
+}
+
+loadReports();
+</script>
+<script src="script.js"></script>
+
+</body>
+>>>>>>> 71b3e4e4f6f902c95fc9786afb96cfff1a161ab1
 </html>

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -117,4 +118,125 @@ loadHomeStats();
 </script>
 <script src="script.js"></script>
 </body>
+=======
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CivicConnect</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav>
+       <h2>🌿 CivicConnect</h2>
+
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="complaint.html">Register Complaint</a></li>
+        <li><a href="track.html">Track Complaint</a></li>
+        <li><a href="admin.html">Admin Login</a></li>
+      </ul>
+    </nav>
+
+<div class="container">
+
+   <section class="hero">
+
+    <div class="hero-text">
+        <h1>Welcome to <span>CivicConnect</span></h1>
+
+        <h2>Together for a Better Village</h2>
+
+        <p>
+            Report civic issues in your village easily.
+            We are here to listen and help.
+        </p>
+
+        <div class="hero-buttons">
+            <a href="complaint.html" class="btn">Lodge Complaint</a>
+            <a href="track.html" class="btn secondary-btn">Track Complaint</a>
+        </div>
+    </div>
+
+    <div class="hero-image">
+        <img src="images/Village.png" alt="Village Image">
+    </div>
+
+</section>
+<p class="motto">
+    Empowering Communities Through Digital Solutions
+</p>
+
+</div>
+<div class="welcome-box">
+
+    <h2>Welcome to CivicConnect</h2>
+
+    <p>
+        CivicConnect is a digital complaint management platform
+        designed to help citizens report and track civic issues
+        efficiently. It connects local communities with authorities
+        for faster problem resolution and improved public services.
+    </p>
+
+</div>
+<h2 class="section-title">Community Statistics</h2>
+<div class="cards">
+
+    <div class="card">
+        
+        <p>📋TotalComplaints</p>
+        <h3 id="totalComplaints"></h3>
+    </div>
+
+    <div class="card">
+          <p>⏳ Pending</p>
+            <h3 id="pendingComplaints"></h3>
+    </div>
+
+    <div class="card">
+          <p>✅ Resolved</p>
+          <h3 id ="resolvedComplaints"></h3>
+    </div>
+
+    
+</div>
+<div class="features">
+
+    <div class="feature">
+        📢 Easy Complaint Registration
+    </div>
+
+    <div class="feature">
+        🔍 Track Complaint Status
+    </div>
+
+    <div class="feature">
+        📄 Digital Complaint Slip
+    </div>
+
+</div>
+<div class="announcement">
+    🚨 Report civic issues quickly and help improve your community.
+</div>
+<footer>
+    <p>© 2026 CivicConnect | Developed by CSP Team</p>
+</footer>
+<script>
+async function loadHomeStats(){
+
+    const res = await fetch("http://127.0.0.1:5000/stats");
+    const data = await res.json();
+
+    document.getElementById("totalComplaints").innerText = data.total;
+    document.getElementById("pendingComplaints").innerText = data.pending;
+    document.getElementById("resolvedComplaints").innerText = data.resolved;
+}
+
+loadHomeStats();
+</script>
+<script src="script.js"></script>
+</body>
+>>>>>>> 71b3e4e4f6f902c95fc9786afb96cfff1a161ab1
 </html>
