@@ -161,6 +161,9 @@ if(village){
 }
     const res = await fetch(url);
     const data = await res.json();
+    alert("Village = " + village);
+alert("Records Found = " + data.length);
+console.log(data);
 
     const container = document.getElementById("complaintsContainer");
     const title = document.getElementById("pageTitle");
@@ -384,6 +387,8 @@ async function loadHomeStats() {
     );
 
     const data = await res.json();
+    console.log("Village:", village);
+    console.log("Data:", data);
 
     const total = document.getElementById("totalComplaints");
     const pending = document.getElementById("pendingComplaints");

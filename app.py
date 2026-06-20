@@ -36,7 +36,7 @@ def submit_complaint():
 
         full_name = request.form["full_name"]
         mobile = request.form["mobile"]
-        village = request.form["village"]
+        village = request.form["village"].strip()
         category = request.form["category"]
         description = request.form["description"]
         image = request.files["image"]
@@ -123,14 +123,24 @@ def all_complaints():
 def complaints_by_village(village):
 
     try:
+
         data = supabase.table("complaints") \
             .select("*") \
-            .eq("village", village) \
             .execute()
 
-        return jsonify(data.data)
+        result = []
+
+        for item in data.data:
+
+            db_village = item["village"]
+
+            if db_village.strip().lower() == village.strip().lower():
+                result.append(item)
+
+        return jsonify(result)
 
     except Exception as e:
+
         return jsonify({"error": str(e)})
 @app.route("/update-status/<complaint_id>", methods=["PUT"])
 def update_complaint_status(complaint_id):
@@ -305,5 +315,11 @@ def track_complaint(complaint_id):
 
     except Exception as e:
         return jsonify({"error": str(e)})    
+@app.route("/debug-villages")
+def debug_villages():
+
+    data = supabase.table("complaints").select("village").execute()
+
+    return jsonify(data.data)    
 if __name__ == "__main__":
     app.run(debug=True)
