@@ -387,18 +387,10 @@ async function loadHomeStats() {
     );
 
     const data = await res.json();
-    console.log("Village:", village);
-    console.log("Data:", data);
 
-    const total = document.getElementById("totalComplaints");
-    const pending = document.getElementById("pendingComplaints");
-    const resolved = document.getElementById("resolvedComplaints");
-
-    if(total) total.textContent = data.total;
-    if(pending) pending.textContent = data.pending;
-    if(resolved) resolved.textContent = data.resolved;
+    document.getElementById("homeTotal").innerText = data.total;
+    document.getElementById("homePending").innerText = data.pending;
+    document.getElementById("homeResolved").innerText = data.resolved;
 }
 
-if(document.getElementById("totalComplaints")){
-    loadHomeStats();
-}
+loadHomeStats();
