@@ -143,12 +143,15 @@ def complaints_by_village(village):
 
         return jsonify({"error": str(e)})
 @app.route("/update-status/<complaint_id>", methods=["PUT"])
-def update_complaint_status(complaint_id):
+
+def update_status(complaint_id):
 
     try:
 
+        status = request.json["status"]
+
         supabase.table("complaints") \
-            .update({"status": "Resolved"}) \
+            .update({"status": status}) \
             .eq("complaint_id", complaint_id) \
             .execute()
 
@@ -161,25 +164,7 @@ def update_complaint_status(complaint_id):
         return jsonify({
             "success": False,
             "error": str(e)
-        })    
-@app.route("/update-status/<complaint_id>", methods=["PUT"])
-def update_status(complaint_id):
-
-    try:
-
-        supabase.table("complaints") \
-            .update({"status": "Resolved"}) \
-            .eq("complaint_id", complaint_id) \
-            .execute()
-
-        return jsonify({"success": True})
-
-    except Exception as e:
-
-        return jsonify({
-            "success": False,
-            "error": str(e)
-        })    
+        })
 @app.route("/stats", methods=["GET"])
 def get_stats():
 
@@ -198,12 +183,16 @@ def get_stats():
             x for x in data.data
             if x["status"] == "Resolved"
         ])
+        progress = len([
+            x for x in data.data
+            if x["status"] == "In Progress"
+        ])
 
         return jsonify({
             "total": total,
             "pending": pending,
             "resolved": resolved,
-            "progress": 0
+            "progress": progress
         })
 
     except Exception as e:

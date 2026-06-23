@@ -196,11 +196,21 @@ row.innerHTML = `
             : "No Image"}
     </td>
 
-    <td>
-        <button onclick="markResolved('${item.complaint_id}')">
-            Resolve
-        </button>
-    </td>
+   <td>
+    <select onchange="updateStatus('${item.complaint_id}', this.value)">
+        <option value="Pending" ${item.status === "Pending" ? "selected" : ""}>
+            Pending
+        </option>
+
+        <option value="In Progress" ${item.status === "In Progress" ? "selected" : ""}>
+            In Progress
+        </option>
+
+        <option value="Resolved" ${item.status === "Resolved" ? "selected" : ""}>
+            Resolved
+        </option>
+    </select>
+</td>
 `;
 
 document.getElementById("complaintsContainer").appendChild(row);
@@ -394,3 +404,31 @@ async function loadHomeStats() {
 }
 
 loadHomeStats();
+async function updateStatus(complaintId, status){
+
+    const res = await fetch(
+        "https://civicconnect-xred.onrender.com/update-status/" + complaintId,
+        {
+            method: "PUT",
+
+            headers: {
+                "Content-Type": "application/json"
+            },
+
+            body: JSON.stringify({
+                status: status
+            })
+        }
+    );
+
+    const data = await res.json();
+
+    if(data.success){
+
+        location.reload();
+
+    }else{
+
+        alert("Failed to update status");
+    }
+}
