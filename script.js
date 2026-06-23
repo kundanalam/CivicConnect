@@ -146,7 +146,6 @@ async function loadComplaints() {
 
     const params = new URLSearchParams(window.location.search);
     const village = params.get("village");
-    alert("Village = " + village);
 
    let url;
 
@@ -161,8 +160,7 @@ if(village){
 }
     const res = await fetch(url);
     const data = await res.json();
-    alert("Village = " + village);
-alert("Records Found = " + data.length);
+   
 console.log(data);
 
     const container = document.getElementById("complaintsContainer");
@@ -177,6 +175,7 @@ console.log(data);
     data.forEach(item => {
 
        const row = document.createElement("tr");
+       row.setAttribute("data-status", item.status);
 
 row.innerHTML = `
     <td>${item.complaint_id}</td>
@@ -431,4 +430,30 @@ async function updateStatus(complaintId, status){
 
         alert("Failed to update status");
     }
+}
+function filterComplaints(){
+
+    const selected =
+        document.getElementById("statusFilter").value;
+
+    const rows =
+        document.querySelectorAll(
+            "#complaintsContainer tr"
+        );
+
+    rows.forEach(row => {
+
+        const status =
+            row.getAttribute("data-status");
+
+        if(
+            selected === "All" ||
+            status === selected
+        ){
+            row.style.display = "";
+        }else{
+            row.style.display = "none";
+        }
+
+    });
 }
