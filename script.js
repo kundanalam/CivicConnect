@@ -361,7 +361,7 @@ if(document.getElementById("recentComplaintsBody")){
     loadDashboardData();
 }
 function downloadExcel(){
-    window.open("http:///download-excel");
+    window.open("https://civicconnect-xred.onrender.com/download-excel");
 }
 async function trackComplaint(){
 
