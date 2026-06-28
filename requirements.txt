@@ -4,3 +4,4 @@ gunicorn
 supabase
 python-dotenv
 pandas
+openpyxl
